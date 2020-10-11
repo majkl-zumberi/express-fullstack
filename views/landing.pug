@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/", method="POST")
+    input(name="email_form",type="email",placeholder="Inserisci la tua email")
+    button(type="submit") Invia
+  if leads
+    h1 Leads
+    for lead in leads
+      p(id=lead.id)
+        span #{lead.email}
+        | 
+        a(href="/lead/"+lead.id) Dettaglio
+        |
+        button(onclick=`deleteLead('${lead.id}')`) Elimina
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js")
+  script(src="/javascripts/leads.js")
